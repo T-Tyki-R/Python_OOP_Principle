@@ -1,72 +1,34 @@
 '''
-# 
+# Creating a module with a class for storing and mutating value involving budgeting
 '''
-class BudgetCategories:
-    def __init__(self, entertainment, utilities, food):
-        self.__entertainment = entertainment
-        self.___utilities = utilities
-        self.__food = food
+class BudgetCategory:
+    def __init__(self, name, allocated_budget):
+        self.__name = name
+        self.__allocated_budget = allocated_budget
+        self.__remaining_budget = allocated_budget
     
     # Getter and Setter Methods for the budget of Entertainment, Utilities, and Food
-    def set_entertainment(self, e_bill):
-        self.__entertainment = e_bill
+    def set_name(self, name):
+        self.__name = name
         
-    def set_entertainment_budget(self):
-        self.__entertainment = 100
+    def set_budget(self, budget):
+        if budget > 0:
+            self.__allocated_budget = budget
+  
+    def get_name(self):
+        return self.__name
 
-    def set_utilities(self, u_bill):
-        self.___utilities = u_bill
+    def get_budget(self):
+        return self.__allocated_budget
 
-    def set_utilities_budget(self):
-        self.___utilities = 200
-
-    def set_food(self, f_bill):
-        self.__food = f_bill
-
-    def set_food_budget(self):
-        self.__food = 200
-
-    def get_entertainment_budget(self):
-        return self.__entertainment
-
-    def get_utilities_budget(self):
-        return self.___utilities
-
-    def get_food_budget(self):
-        return self.__food
     
     # Budget functionalities
     def add_expenses(self, amount):
-        print("1. Entertainment\n2. Utilities\n3. Food\n")
-        user_choice = int(input("Which category do you pick? "))
-        amount = float(input("How much this you spend on this expense?: "))
-        if user_choice == 1:
-            if self.get_entertainment_budget() > amount:
-                self.set_entertainment_budget(self.get_entertainment_budget()) - amount
-            else:
-                print("You exceeded your budget...")
-        elif user_choice == 2:
-            if self.get_utilities_budget() > amount:
-                self.set_entertainment_budget(self.get_utilities_budget() - amount)
-            else:
-                print("You exceeded your budget...")
-        elif user_choice == 3:
-            if self.get_food_budget() > amount:
-                self.set_food_budget(self.set_food_budget - amount) 
-            else:
-                print("You exceeded your budget...")
+        if self.__allocated_budget > amount:
+            self.__remaining_budget -= amount
         else:
-            print("You picked an invalid option")
-
+            print("You exceeded your budget...")   
 
     def display_category_summary(self):
-        pass
+        print(f"Budget for {self.__name}: Initial Budget: {self.__allocated_budget} Remaining Budget: {self.__remaining_budget}")
 
-
-food_category = BudgetCategories("food", 500)
-food_category.add_expenses(100)
-# food_category.display_category_summary()   
-    
-
-
-  
